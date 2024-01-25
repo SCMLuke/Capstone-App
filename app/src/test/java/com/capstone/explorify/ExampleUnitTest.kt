@@ -1,4 +1,4 @@
-package com.example.capstoneapp
+package com.capstone.explorify
 
 import org.junit.Test
 

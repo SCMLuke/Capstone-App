@@ -1,4 +1,4 @@
-package com.example.capstoneapp
+package com.capstone.explorify
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
