@@ -91,9 +91,8 @@ class CountrySelection {
         }
     }
 
-    @Preview
     @Composable
     private fun LandingScreenPreview() {
-        LandingScreen(Modifier)
+        CountrySelection().LandingScreen()
     }
 }
