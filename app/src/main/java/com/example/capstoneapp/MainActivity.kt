@@ -21,6 +21,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.capstoneapp.ui.theme.CapstoneAppTheme
+import com.example.capstoneapp.views.CountrySelection
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
@@ -39,10 +40,10 @@ class MainActivity : ComponentActivity() {
 
                     // The two pages to navigate between. Functions when buttons are pressed.
                     composable("homePage") {
-                        homePage(modifier = Modifier, navController)
+                        CountrySelection().homePage(modifier = Modifier, navController)
                     }
                     composable("mapTest") {
-                        mapTest(modifier = Modifier, navController)
+                        CountrySelection().mapTest(modifier = Modifier, navController)
                     }
                 }
 
@@ -59,48 +60,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun homePage(modifier: Modifier = Modifier, navController: NavHostController) {
-    Column(modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Bottom,
-        horizontalAlignment = Alignment.CenterHorizontally) {
-        Button(onClick = { navController.navigate("mapTest") },
-            modifier.padding(0.dp,0.dp,0.dp,48.dp),) {
-            Text(text = "View Map",
-                fontSize = 24.sp)
-        }
-    }
-}
 
-@Composable
-fun mapTest(modifier: Modifier = Modifier, navController: NavHostController) {
-    val halifax = LatLng(44.6476, -63.5728)
-    val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(halifax, 10f)
-    }
-    // Box to layer the "Return" button on top of the map.
-    Box(modifier = Modifier.fillMaxSize()) {
-        GoogleMap(
-            modifier = Modifier.fillMaxSize(),
-            cameraPositionState = cameraPositionState
-        ) {
-            Marker(
-                state = MarkerState(position = halifax),
-                title = "Halifax",
-                snippet = "Marker in Halifax."
-            )
-        }
-        Column(modifier = modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Bottom,
-            horizontalAlignment = Alignment.CenterHorizontally) {
-            Button(onClick = { navController.navigate("homePage") },
-                modifier.padding(0.dp,0.dp,0.dp,48.dp),) {
-                Text(text = "Return",
-                    fontSize = 24.sp)
-            }
-        }
-    }
-}
 
 @Preview(showBackground = true)
 @Composable
