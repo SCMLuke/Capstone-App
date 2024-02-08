@@ -3,31 +3,15 @@ package com.example.capstoneapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.capstoneapp.ui.theme.CapstoneAppTheme
 import com.example.capstoneapp.views.CountrySelection
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
-import com.google.maps.android.compose.GoogleMap
-import com.google.maps.android.compose.Marker
-import com.google.maps.android.compose.MarkerState
-import com.google.maps.android.compose.rememberCameraPositionState
+import com.example.capstoneapp.views.MapView
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,10 +24,10 @@ class MainActivity : ComponentActivity() {
 
                     // The two pages to navigate between. Functions when buttons are pressed.
                     composable("homePage") {
-                        CountrySelection().homePage(modifier = Modifier, navController)
+                        MapView().homePage(modifier = Modifier, navController)
                     }
                     composable("mapTest") {
-                        CountrySelection().mapTest(modifier = Modifier, navController)
+                        MapView().mapTest(modifier = Modifier, navController)
                     }
                 }
 
@@ -59,8 +43,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-
 
 @Preview(showBackground = true)
 @Composable
