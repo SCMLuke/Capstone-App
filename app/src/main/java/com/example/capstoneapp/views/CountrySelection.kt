@@ -65,7 +65,8 @@ class CountrySelection {
         )
 
         LazyColumn(
-            modifier = Modifier.background(LandingScreenStyle.BodyStyle.backgroundColor)
+            modifier = Modifier
+                .background(LandingScreenStyle.BodyStyle.backgroundColor)
         ) {
             stickyHeader {
                 Box(
@@ -81,9 +82,14 @@ class CountrySelection {
                             fontSize = 32.sp,
                             fontWeight = FontWeight.Bold,
                         ),
-                        modifier = Modifier.padding(22.dp)
+                        modifier = Modifier.padding(16.dp)
                     )
                 }
+            }
+
+            // This adds a little bit of space between the sticky header and set of expandable cards
+            item {
+                Spacer(modifier = Modifier.height(16.dp))
             }
 
             items(countries.size) { index ->
@@ -115,8 +121,8 @@ class CountrySelection {
                     Text(
                         text = country,
                         style = TextStyle(
-                            fontSize = 24.sp,
-                            fontWeight = FontWeight.Light
+                            LandingScreenStyle.ExpandedCardStyle.textColor,
+                            LandingScreenStyle.ExpandedCardStyle.fontSize
                         ),
                         modifier = Modifier.weight(1f)
                     )
