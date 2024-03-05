@@ -17,37 +17,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CapstoneAppTheme {
-
-                val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = "homePage") {
-
-                    // The two pages to navigate between. Functions when buttons are pressed.
-                    composable("homePage") {
-                        CountrySelection().homePage(modifier = Modifier, navController)
-                    }
-                    composable("mapTest") {
-                        CountrySelection().mapTest(modifier = Modifier, navController)
-                    }
-                }
-
-                // Silly comments
-                // A surface container using the 'background' color from the theme
-//                Surface(
-//                    modifier = Modifier.fillMaxSize(),
-//                    color = MaterialTheme.colorScheme.background
-//                ) {
-//                    mapTest()
-//                }
+                // Runs the LandingScreen function from CountrySelection as main entry point to app
+                CountrySelection().LandingScreen()
             }
         }
-    }
-}
-
-
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    CapstoneAppTheme {
     }
 }

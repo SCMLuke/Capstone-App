@@ -1,30 +1,49 @@
 package com.example.capstoneapp.views
 
-import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
+import androidx.compose.foundation.text.ClickableText
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CardElevation
+import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -38,116 +57,133 @@ import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
 
 class CountrySelection {
+    @OptIn(ExperimentalFoundationApi::class)
     @Composable
     fun LandingScreen(modifier: Modifier = Modifier) {
-        val countries = listOf("America", "Argentina", "Bhutan", "Canada", "France", "Greece", "Iran", "Mexico", "Netherlands", "Sweden")
+        val countries = listOf(
+            "America",
+            "Argentina",
+            "Australia",
+            "Bhutan",
+            "Brazil",
+            "Canada",
+            "China",
+            "France",
+            "Germany",
+            "Greece",
+            "India",
+            "Iran",
+            "Italy",
+            "Japan",
+            "Mexico",
+            "Netherlands",
+            "Russia",
+            "Sweden"
+        )
 
         LazyColumn(
-            modifier = modifier
-                .fillMaxSize()
-                .background(color = Color(0xff273537))
+            modifier = Modifier.background(Color(0xff727272)) // Screen BG color
         ) {
-            item {
+            stickyHeader {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .requiredHeight(height = 90.dp)
-                        .background(color = Color(0xff254954))
+                        .background(color = Color(0xff254954)) // Sticky header BG color
                 ) {
                     Text(
                         text = "Country Selection",
                         color = Color.White,
-                        textAlign = TextAlign.Center,
+                        textAlign = TextAlign.Start,
                         style = TextStyle(
-                            fontSize = 48.sp,
+                            fontSize = 32.sp,
                             fontWeight = FontWeight.Bold,
-                            shadow = Shadow(
-                                color = Color.Black.copy(alpha = 0.25f),
-                                offset = Offset(0f, 4f),
-                                blurRadius = 4f
-                            )
                         ),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .requiredHeight(height = 90.dp)
-                            .border(border = BorderStroke(1.dp, Color(0xff282828)))
-                            .wrapContentHeight(align = Alignment.CenterVertically)
+                        modifier = Modifier.padding(22.dp)
                     )
                 }
             }
 
             items(countries.size) { index ->
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .requiredHeight(85.dp)
-                        .padding(vertical = 8.dp, horizontal = 20.dp)
-                        .clip(shape = RoundedCornerShape(25.dp))
-                        .background(color = Color(0xff8db2b2))
+                ExpandableCard(
+                    country = countries[index]
+                )
+            }
+        }
+    }
+
+    // Compose code for the expandable card function
+    @Composable
+    fun ExpandableCard(country: String, modifier: Modifier = Modifier) {
+        var expanded by remember { mutableStateOf(false) }
+        val arrowIcon: ImageVector = if (expanded) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowRight
+
+        ElevatedCard(
+            shape = MaterialTheme.shapes.medium,
+            //elevation = 8.dp, Don't know why this won't work: need to fix
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 4.dp, horizontal = 7.dp)
+                .clickable { expanded = !expanded }
+            ) {
+            Column(modifier = Modifier.padding(20.dp)) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        text = countries[index],
-                        color = Color(0xff0f0f0f),
-                        textAlign = TextAlign.Center,
+                        text = country,
                         style = TextStyle(
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Light
                         ),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .wrapContentHeight(align = Alignment.CenterVertically)
+                        modifier = Modifier.weight(1f)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Icon(
+                        imageVector = arrowIcon,
+                        contentDescription = "Card Expansion Arrow",
+                        modifier = Modifier.size(24.dp)
                     )
                 }
-            }
-        }
-    }
 
-
-
-    @Composable
-    public fun homePage(modifier: Modifier = Modifier, navController: NavHostController) {
-        Column(modifier = modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Bottom,
-            horizontalAlignment = Alignment.CenterHorizontally) {
-            Button(onClick = { navController.navigate("mapTest") },
-                modifier.padding(0.dp,0.dp,0.dp,48.dp),) {
-                Text(text = "View Map",
-                    fontSize = 24.sp)
-            }
-        }
-    }
-    @Composable
-    public fun mapTest(modifier: Modifier = Modifier, navController: NavHostController) {
-        val mexicoHistorical = LatLng(Mexico.mexico.historicalSites[0].latitude, Mexico.mexico.historicalSites[0].longitude)
-        val cameraPositionState = rememberCameraPositionState {
-            position = CameraPosition.fromLatLngZoom(mexicoHistorical, 10f)
-        }
-        // Box to layer the "Return" button on top of the map.
-        Box(modifier = Modifier.fillMaxSize()) {
-            GoogleMap(
-                modifier = Modifier.fillMaxSize(),
-                cameraPositionState = cameraPositionState
-            ) {
-                Marker(
-                    state = MarkerState(position = mexicoHistorical),
-                    title = Mexico.mexico.countryName,
-                    snippet = Mexico.mexico.countryDescription
-                )
-            }
-            Column(modifier = modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Bottom,
-                horizontalAlignment = Alignment.CenterHorizontally) {
-                Button(onClick = { navController.navigate("homePage") },
-                    modifier.padding(0.dp,0.dp,0.dp,48.dp),) {
-                    Text(text = "Return",
-                        fontSize = 24.sp)
+                // TODO: Map onClick events to sections within the map
+                if (expanded) {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Column {
+                        ClickableText(
+                            text = buildAnnotatedString {
+                                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                                    append("Historical Locations\n")
+                                }
+                            },
+                            onClick = {  }
+                        )
+                        ClickableText(
+                            text = buildAnnotatedString {
+                                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                                    append("Cultural Centers\n")
+                                }
+                            },
+                            onClick = {  }
+                        )
+                        ClickableText(
+                            text = buildAnnotatedString {
+                                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                                    append("Local Food\n")
+                                }
+                            },
+                            onClick = {  }
+                        )
+                        ClickableText(
+                            text = buildAnnotatedString {
+                                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                                    append("Museums\n")
+                                }
+                            },
+                            onClick = {  }
+                        )
+                    }
                 }
             }
         }
-    }
-
-    @Composable
-    private fun LandingScreenPreview() {
-        CountrySelection().LandingScreen()
     }
 }
