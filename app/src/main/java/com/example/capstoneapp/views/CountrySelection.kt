@@ -28,6 +28,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.capstoneapp.model.Country
+import com.example.capstoneapp.model.CreatedCountries.Mexico
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
@@ -114,12 +116,11 @@ class CountrySelection {
             }
         }
     }
-
     @Composable
     public fun mapTest(modifier: Modifier = Modifier, navController: NavHostController) {
-        val halifax = LatLng(44.6476, -63.5728)
+        val mexicoHistorical = LatLng(Mexico.mexico.historicalSites[0].latitude, Mexico.mexico.historicalSites[0].longitude)
         val cameraPositionState = rememberCameraPositionState {
-            position = CameraPosition.fromLatLngZoom(halifax, 10f)
+            position = CameraPosition.fromLatLngZoom(mexicoHistorical, 10f)
         }
         // Box to layer the "Return" button on top of the map.
         Box(modifier = Modifier.fillMaxSize()) {
@@ -128,9 +129,9 @@ class CountrySelection {
                 cameraPositionState = cameraPositionState
             ) {
                 Marker(
-                    state = MarkerState(position = halifax),
-                    title = "Halifax",
-                    snippet = "Marker in Halifax."
+                    state = MarkerState(position = mexicoHistorical),
+                    title = Mexico.mexico.countryName,
+                    snippet = Mexico.mexico.countryDescription
                 )
             }
             Column(modifier = modifier.fillMaxSize(),
