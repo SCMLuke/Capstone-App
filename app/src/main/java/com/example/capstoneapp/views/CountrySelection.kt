@@ -122,7 +122,8 @@ class CountrySelection {
                         text = country,
                         style = TextStyle(
                             LandingScreenStyle.ExpandedCardStyle.textColor,
-                            LandingScreenStyle.ExpandedCardStyle.fontSize
+                            LandingScreenStyle.ExpandedCardStyle.fontSize,
+                            LandingScreenStyle.ExpandedCardStyle.fontWeight
                         ),
                         modifier = Modifier.weight(1f)
                     )
@@ -140,7 +141,10 @@ class CountrySelection {
                     Column {
                         ClickableText(
                             text = buildAnnotatedString {
-                                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                                withStyle(style = SpanStyle(
+                                    color = LandingScreenStyle.ExpandedCardStyle.textColor,
+                                    fontWeight = LandingScreenStyle.ExpandedCardStyle.fontWeight
+                                )) {
                                     append("Historical Locations\n")
                                 }
                             },
@@ -148,7 +152,10 @@ class CountrySelection {
                         )
                         ClickableText(
                             text = buildAnnotatedString {
-                                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                                withStyle(style = SpanStyle(
+                                    color = LandingScreenStyle.ExpandedCardStyle.textColor,
+                                    fontWeight = LandingScreenStyle.ExpandedCardStyle.fontWeight
+                                )) {
                                     append("Cultural Centers\n")
                                 }
                             },
@@ -156,7 +163,10 @@ class CountrySelection {
                         )
                         ClickableText(
                             text = buildAnnotatedString {
-                                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                                withStyle(style = SpanStyle(
+                                    color = LandingScreenStyle.ExpandedCardStyle.textColor,
+                                    fontWeight = LandingScreenStyle.ExpandedCardStyle.fontWeight
+                                )) {
                                     append("Local Food\n")
                                 }
                             },
@@ -164,7 +174,10 @@ class CountrySelection {
                         )
                         ClickableText(
                             text = buildAnnotatedString {
-                                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                                withStyle(style = SpanStyle(
+                                    color = LandingScreenStyle.ExpandedCardStyle.textColor,
+                                    fontWeight = LandingScreenStyle.ExpandedCardStyle.fontWeight
+                                )) {
                                     append("Museums\n")
                                 }
                             },
