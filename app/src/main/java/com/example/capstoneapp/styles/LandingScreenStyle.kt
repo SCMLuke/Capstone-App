@@ -1,6 +1,7 @@
 package com.example.capstoneapp.styles
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 class LandingScreenStyle {
@@ -14,6 +15,7 @@ class LandingScreenStyle {
     }
     object ExpandedCardStyle {
         val textColor: Color = Color(0xFFD1D1D1)
-        val fontSize = 16.sp
+        val fontSize = 20.sp
+        val fontWeight = FontWeight.Bold
     }
 }
