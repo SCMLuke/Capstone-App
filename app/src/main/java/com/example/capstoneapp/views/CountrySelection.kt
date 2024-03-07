@@ -28,7 +28,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.capstoneapp.model.Country
 import com.example.capstoneapp.model.CreatedCountries.Mexico
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -118,9 +117,11 @@ class CountrySelection {
     }
     @Composable
     public fun mapTest(modifier: Modifier = Modifier, navController: NavHostController) {
-        val mexicoHistorical = LatLng(Mexico.mexico.historicalSites[0].latitude, Mexico.mexico.historicalSites[0].longitude)
+        val mexicoHistorical1 = LatLng(Mexico.mexico.historicalSites[0].latitude, Mexico.mexico.historicalSites[0].longitude)
+        val mexicoHistorical2 = LatLng(Mexico.mexico.historicalSites[1].latitude, Mexico.mexico.historicalSites[1].longitude)
+        val mexicoHistorical3 = LatLng(Mexico.mexico.historicalSites[2].latitude, Mexico.mexico.historicalSites[2].longitude)
         val cameraPositionState = rememberCameraPositionState {
-            position = CameraPosition.fromLatLngZoom(mexicoHistorical, 10f)
+            position = CameraPosition.fromLatLngZoom(mexicoHistorical1, 10f)
         }
         // Box to layer the "Return" button on top of the map.
         Box(modifier = Modifier.fillMaxSize()) {
@@ -129,9 +130,19 @@ class CountrySelection {
                 cameraPositionState = cameraPositionState
             ) {
                 Marker(
-                    state = MarkerState(position = mexicoHistorical),
-                    title = Mexico.mexico.countryName,
-                    snippet = Mexico.mexico.countryDescription
+                    state = MarkerState(position = mexicoHistorical3),
+                    title = Mexico.mexico.historicalSites[2].locationName,
+                    snippet = Mexico.mexico.historicalSites[2].locationDescription
+                )
+                Marker(
+                    state = MarkerState(position = mexicoHistorical2),
+                    title = Mexico.mexico.historicalSites[1].locationName,
+                    snippet = Mexico.mexico.historicalSites[1].locationDescription
+                )
+                Marker(
+                    state = MarkerState(position = mexicoHistorical1),
+                    title = Mexico.mexico.historicalSites[0].locationName,
+                    snippet = Mexico.mexico.historicalSites[0].locationDescription
                 )
             }
             Column(modifier = modifier.fillMaxSize(),
