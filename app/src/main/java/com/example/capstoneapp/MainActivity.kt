@@ -17,8 +17,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CapstoneAppTheme {
+                val navController = rememberNavController()
                 // Runs the LandingScreen function from CountrySelection as main entry point to app
-                CountrySelection().LandingScreen()
+                CountrySelection().LandingScreen(navController = navController)
             }
         }
     }
