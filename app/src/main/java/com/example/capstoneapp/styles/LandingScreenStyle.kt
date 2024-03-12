@@ -3,6 +3,7 @@ package com.example.capstoneapp.styles
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.example.capstoneapp.ui.theme.Nunito
 
 class LandingScreenStyle {
 
@@ -17,5 +18,6 @@ class LandingScreenStyle {
         val textColor: Color = Color(0xFFD1D1D1)
         val fontSize = 20.sp
         val fontWeight = FontWeight.Bold
+        val fontFamily = Nunito
     }
 }
