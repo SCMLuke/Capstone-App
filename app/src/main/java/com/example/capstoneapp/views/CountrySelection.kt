@@ -32,24 +32,19 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import com.example.capstoneapp.styles.LandingScreenStyle
-import com.example.capstoneapp.ui.theme.Noto
-import com.example.capstoneapp.ui.theme.Nunito
-import com.example.capstoneapp.ui.theme.RedhatDisplay
 import com.example.capstoneapp.ui.theme.Syne
 
 class CountrySelection {
     @OptIn(ExperimentalFoundationApi::class)
     @Composable
-    fun LandingScreen(modifier: Modifier = Modifier, navController: NavHostController) {
+    fun LandingScreen(modifier: Modifier = Modifier, navController: NavController) {
         val countries = listOf(
             "America",
             "Argentina",
@@ -103,10 +98,7 @@ class CountrySelection {
             items(countries.size) { index ->
                 ExpandableCard(
                     country = countries[index],
-                    navController = navController,
-                    onHistoricalLocationsClick = {
-                        navController.navigate("map/${countries[index]}")
-                    }
+                    navController = navController
                 )
             }
         }
@@ -114,7 +106,10 @@ class CountrySelection {
 
     // Compose code for the expandable card function
     @Composable
-    fun ExpandableCard(country: String, navController: NavHostController, onHistoricalLocationsClick: () -> Unit) {
+    fun ExpandableCard(
+        country: String,
+        navController: NavController
+    ) {
         var expanded by remember { mutableStateOf(false) }
         val arrowIcon: ImageVector = if (expanded) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowRight
 
@@ -162,7 +157,7 @@ class CountrySelection {
                                     append("Historical Locations\n")
                                 }
                             },
-                            onClick = { onHistoricalLocationsClick() }
+                            onClick = { navController.navigate("map_screen") }
                         )
                         ClickableText(
                             text = buildAnnotatedString {
