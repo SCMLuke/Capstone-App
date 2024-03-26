@@ -21,6 +21,9 @@ class MainActivity : ComponentActivity() {
                 // Runs the LandingScreen function from CountrySelection as main entry point to app
                 CountrySelection().LandingScreen(navController = navController)
             }
+                // Runs the LandingScreen function from CountrySelection as main entry point to app. Needs more testing
+                //CountrySelection().LandingScreen(navController = navController)
+            //}
         }
     }
 }
