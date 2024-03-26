@@ -7,4 +7,3 @@ class Country(
     var museum: List<Museums> = ArrayList(),
     var food: List<Food> = ArrayList()) {
 }
-
