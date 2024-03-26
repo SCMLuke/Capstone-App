@@ -103,7 +103,10 @@ class CountrySelection {
             items(countries.size) { index ->
                 ExpandableCard(
                     country = countries[index],
-                    navController = navController
+                    navController = navController,
+                    onHistoricalLocationsClick = {
+                        navController.navigate("map/${countries[index]}")
+                    }
                 )
             }
         }
@@ -111,7 +114,7 @@ class CountrySelection {
 
     // Compose code for the expandable card function
     @Composable
-    fun ExpandableCard(country: String, navController: NavHostController) {
+    fun ExpandableCard(country: String, navController: NavHostController, onHistoricalLocationsClick: () -> Unit) {
         var expanded by remember { mutableStateOf(false) }
         val arrowIcon: ImageVector = if (expanded) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowRight
 
@@ -159,7 +162,7 @@ class CountrySelection {
                                     append("Historical Locations\n")
                                 }
                             },
-                            onClick = { }
+                            onClick = { onHistoricalLocationsClick() }
                         )
                         ClickableText(
                             text = buildAnnotatedString {
